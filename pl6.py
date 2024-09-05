@@ -16,7 +16,7 @@ def generate_unique_filename(base_name):
     return f"{base_name}_{timestamp}.json"
 
 # Initialize Box client with your access token
-ACCESS_TOKEN = 'lXD0r8yCkI6j5YafLsdwyuMpKC6I1Lir'
+ACCESS_TOKEN = 'ylt7qnRll7FbGabipJ2cdJQERDsh56jY'
 oauth2 = OAuth2(client_id=None, client_secret=None, access_token=ACCESS_TOKEN)
 client = Client(oauth2)
 
@@ -118,7 +118,7 @@ async def get_next_data():
                     # Check if 5 minutes have passed since the last upload
                     if time.time() - start_time >= 100:  # 300 seconds = 5 minutes
                         json_data = json.dumps(all_data, indent=4)
-                        box_folder_id = '283388373032'  # Replace with your Box folder ID
+                        box_folder_id = '283514644333'  # Replace with your Box folder ID
                         filename = 'scraped_next_data.json'  # File to overwrite
                         upload_data_to_box_json(json_data, box_folder_id, filename)
 
@@ -130,7 +130,7 @@ async def get_next_data():
 
         # Final upload after all scraping is done
         json_data = json.dumps(all_data, indent=4)
-        box_folder_id = '283388373032'  # Replace with your Box folder ID
+        box_folder_id = '283514644333'  # Replace with your Box folder ID
         filename = 'scraped_next_data_final.json'
         upload_data_to_box_json(json_data, box_folder_id, filename)
         print(f"Final data upload complete. Total records: {len(all_data)}")
@@ -139,7 +139,7 @@ async def get_next_data():
         print(f"Error during scraping: {e}")
         # Save any data that has been collected so far before exiting
         json_data = json.dumps(all_data, indent=4)
-        box_folder_id = '283388373032'  # Replace with your Box folder ID
+        box_folder_id = '283514644333'  # Replace with your Box folder ID
         filename = 'scraped_next_data_error.json'
         upload_data_to_box_json(json_data, box_folder_id, filename)
         print(f"Error encountered. Data uploaded to Box. Total records: {len(all_data)}")
