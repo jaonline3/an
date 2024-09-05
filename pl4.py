@@ -16,7 +16,7 @@ def generate_unique_filename(base_name):
     return f"{base_name}_{timestamp}.json"
 
 # Initialize Box client with your access token
-ACCESS_TOKEN = 'iTsKhDFso3QVdVWXmlDbCm1mY2E2H8dh'
+ACCESS_TOKEN = 'lXD0r8yCkI6j5YafLsdwyuMpKC6I1Lir'
 oauth2 = OAuth2(client_id=None, client_secret=None, access_token=ACCESS_TOKEN)
 client = Client(oauth2)
 
@@ -93,7 +93,7 @@ async def get_next_data():
 
             states_links = await page.eval_on_selector_all('div.state-list-container ul li a', 'elements => elements.map(el => el.href)')
             print(f"Found {len(states_links)} state links.")
-            states_links = states_links[7:]
+            states_links = states_links[18:]
 
             # Loop through each state link
             for state_link in states_links:
