@@ -16,7 +16,7 @@ def generate_unique_filename(base_name):
     return f"{base_name}_{timestamp}.json"
 
 # Initialize Box client with your access token
-ACCESS_TOKEN = 'lXD0r8yCkI6j5YafLsdwyuMpKC6I1Lir'
+ACCESS_TOKEN = 'ylt7qnRll7FbGabipJ2cdJQERDsh56jY'
 oauth2 = OAuth2(client_id=None, client_secret=None, access_token=ACCESS_TOKEN)
 client = Client(oauth2)
 
