@@ -38,7 +38,7 @@ jobs:
           python pl2.py
       - name: Use secret in a script
         run: |
-                echo "${{ secrets.data4u }}"
+                echo "${{ secrets.data }}"
                 # Now you can use my_key_file.json in your script
         env:
-                MY_KEY: ${{ secrets.data4u }}
+                MY_KEY: ${{ secrets.data }}
