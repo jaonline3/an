@@ -1,4 +1,4 @@
-name: Playwright Automation
+name: Playwright Automation2
 
 # Schedule the action to run daily at midnight (adjust cron as needed)
 on:
@@ -36,4 +36,4 @@ jobs:
       # Step 4: Run your Playwright script
       - name: Run Playwright script
         run: |
-          python pl5.py
+          python pl4.py
