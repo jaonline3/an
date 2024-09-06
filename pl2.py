@@ -16,10 +16,17 @@ nest_asyncio.apply()
 def generate_unique_filename(base_name):
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     return f"{base_name}_{timestamp}.json"
+import json
+
+# Read the key from the file
+with open('my_key_file.json', 'r') as key_file:
+    key_data = json.load(key_file)
+
+# Now you can use key_data in your script
 
 # Initialize Google Drive client
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
-SERVICE_ACCOUNT_FILE = '/home/jamshaid/Downloads/carbide-datum-371202-2ff3f633cf56.json'
+SERVICE_ACCOUNT_FILE = 'key_data'
 credentials = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 drive_service = build('drive', 'v3', credentials=credentials)
