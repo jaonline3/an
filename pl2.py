@@ -18,15 +18,18 @@ def generate_unique_filename(base_name):
     return f"{base_name}_{timestamp}.json"
 import os
 
-key_file_path = os.getenv('GOOGLE_KEY_FILE_PATH', 'key')  # Set a default
+import os
+
+key_file_path = os.getenv('GOOGLE_KEY_FILE_PATH', 'my_key_file.json')  # Set a default
 with open(key_file_path, 'r') as key_file:
     key_data = json.load(key_file)
+
 
 # Now you can use key_data in your script
 
 # Initialize Google Drive client
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
-SERVICE_ACCOUNT_FILE = 'key_data'
+SERVICE_ACCOUNT_FILE = key_data
 credentials = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 drive_service = build('drive', 'v3', credentials=credentials)
