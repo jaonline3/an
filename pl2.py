@@ -16,10 +16,10 @@ nest_asyncio.apply()
 def generate_unique_filename(base_name):
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     return f"{base_name}_{timestamp}.json"
-import json
+import os
 
-# Read the key from the file
-with open('my_key_file.json', 'r') as key_file:
+key_file_path = os.getenv('GOOGLE_KEY_FILE_PATH', 'key')  # Set a default
+with open(key_file_path, 'r') as key_file:
     key_data = json.load(key_file)
 
 # Now you can use key_data in your script
