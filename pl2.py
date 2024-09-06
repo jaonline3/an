@@ -20,7 +20,7 @@ import os
 
 import os
 
-key_data = os.getenv('data')  # Set a default
+key_data = os.getenv('gg')  # Set a default
 key_data = json.loads(key_data)
 
 
