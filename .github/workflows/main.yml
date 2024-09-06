@@ -34,9 +34,9 @@ jobs:
           pip install pandas playwright nest_asyncio google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
  # Step 5: Decode and save JSON file
       - name: Decode and save JSON file
-        run: echo ${{ secrets.ad }} | base64 --decode > file.json
+        run: echo ${{ secrets.aaaa }} | base64 --decode > file.json
         env:
-          MY_KEY: ${{ secrets.ad }}
+          MY_KEY: ${{ secrets.aaaa }}
       # Step 4: Run your Playwright script
       - name: Run Playwright script
         run: |
