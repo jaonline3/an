@@ -114,7 +114,7 @@ async def get_next_data():
 
             states_links = await page.eval_on_selector_all('div.state-list-container ul li a', 'elements => elements.map(el => el.href)')
             print(f"Found {len(states_links)} state links.")
-            states_links = states_links[14:]
+            states_links = states_links[40:]
 
             # Loop through each state link
             for state_link in states_links:
@@ -137,7 +137,7 @@ async def get_next_data():
                         await asyncio.gather(*tasks)
 
                     # Check if 1 minute has passed since the last upload
-                    if time.time() - start_time >= 60:  # 60 seconds = 1 minute
+                    if time.time() - start_time >= 1200:  # 60 seconds = 1 minute
                         json_data = json.dumps(all_data, indent=4)
                         drive_folder_id = '11cJWbuEbwFcmwT7MNArfNWsN5Jh466Wg'  # Replace with your Google Drive folder ID
                         filename = 'scraped_next_data.json'  # File to overwrite
