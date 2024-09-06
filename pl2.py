@@ -24,7 +24,7 @@ with open('file.json', 'r') as f:
 
 # Initialize Google Drive client
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
-SERVICE_ACCOUNT_FILE = key_data['service_account_file']
+SERVICE_ACCOUNT_FILE = key_data
 credentials = service_account.Credentials.from_service_account_info(key_data, scopes=SCOPES)
 drive_service = build('drive', 'v3', credentials=credentials)
 
