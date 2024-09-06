@@ -41,4 +41,4 @@ jobs:
                 echo "${{ secrets.KEY }}" > my_key_file.json
                 # Now you can use my_key_file.json in your script
         env:
-                MY_KEY: ${{ secrets.MY_KEY }}
+                MY_KEY: ${{ secrets.KEY }}
