@@ -21,8 +21,7 @@ import os
 import os
 
 key_file_path = os.getenv(key_data = os.getenv('GG')  # Set a default
-with open(key_file_path, 'r') as key_file:
-    key_data = json.load(key_file)
+key_data = json.loads(key_data)
 
 
 # Now you can use key_data in your script
