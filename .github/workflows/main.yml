@@ -1,6 +1,5 @@
 name: Playwright Automation
 
-# Schedule the action to run daily at midnight (adjust cron as needed)
 on:
   schedule:
     - cron: '0 0 * * *'  # Every day at midnight (UTC)
@@ -11,7 +10,6 @@ on:
         required: false
         default: 'default_value'
 
-# Specify the jobs to be done
 jobs:
   run-playwright:
     runs-on: ubuntu-latest
@@ -32,14 +30,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pandas playwright nest_asyncio google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
- # Step 5: Decode and save JSON file
+
+      # Step 4: Decode and save JSON file from base64
       - name: Decode and save JSON file
-        run: echo ${{ secrets.gar }} | base64 --decode > file.json
-        env:
-          MY_KEY: ${{ secrets.gar }}
-      # Step 4: Run your Playwright script
+        run: echo "${{ secrets.gar }}" | base64 --decode > file.json
+        # Note: 'env' is not needed here as we're not using it in the 'run' command
+
+      # Step 5: Run your Playwright script
       - name: Run Playwright script
         run: |
           python pl2.py
-
-     
