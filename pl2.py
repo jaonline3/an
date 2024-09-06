@@ -139,7 +139,7 @@ async def get_next_data():
                     # Check if 1 minute has passed since the last upload
                     if time.time() - start_time >= 12:  # 60 seconds = 1 minute
                         json_data = json.dumps(all_data, indent=4)
-                        drive_folder_id = '1io0wcM0WcWEiVxDcKIytME89vEd5oAVIg'  # Replace with your Google Drive folder ID
+                        drive_folder_id = '1io0wcM0WcWEiVxDcKIytME89vEd5oAVI'  # Replace with your Google Drive folder ID
                         filename = 'scraped_next_data.json'  # File to overwrite
                         upload_data_to_drive_json(json_data, drive_folder_id, filename)
 
