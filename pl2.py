@@ -20,7 +20,7 @@ import os
 
 import os
 
-key_file_path = os.getenv('GOOGLE_KEY_FILE_PATH', 'my_key_file.json')  # Set a default
+key_file_path = os.getenv(key_data = os.getenv('GG')  # Set a default
 with open(key_file_path, 'r') as key_file:
     key_data = json.load(key_file)
 
