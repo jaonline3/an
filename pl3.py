@@ -160,7 +160,7 @@ async def get_next_data():
         print(f"Error during scraping: {e}")
         # Save any data that has been collected so far before exiting
         json_data = json.dumps(all_data, indent=4)
-        drive_folder_id = '1MP5GR_GFxe8x4eEE-A-uOLaLPeq37Yg1I'  # Replace with your Google Drive folder ID
+        drive_folder_id = '1MP5GR_GFxe8x4eEE-A-uOLaLPeq37Yg1'  # Replace with your Google Drive folder ID
         filename = 'scraped_next_data_error.json'
         upload_data_to_drive_json(json_data, drive_folder_id, filename)
         print(f"Error encountered. Data uploaded to Google Drive. Total records: {len(all_data)}")
