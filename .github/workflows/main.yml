@@ -31,9 +31,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas playwright nest_asyncio boxsdk
-          playwright install
+          pip install pandas playwright nest_asyncio google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client nest_asyncio
       # Step 4: Run your Playwright script
       - name: Run Playwright script
         run: |
           python pl2.py
+      - name: Use secret in a script
+        run: |
+                echo "${{ secrets.KEY }}" > my_key_file.json
+                # Now you can use my_key_file.json in your script
+        env:
+                MY_KEY: ${{ secrets.MY_KEY }}
