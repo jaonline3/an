@@ -9,6 +9,7 @@ from googleapiclient.http import MediaIoBaseUpload
 from io import BytesIO
 import time
 from datetime import datetime
+import os
 
 # Allow nested event loops in Jupyter
 nest_asyncio.apply()
@@ -16,21 +17,15 @@ nest_asyncio.apply()
 def generate_unique_filename(base_name):
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     return f"{base_name}_{timestamp}.json"
-import os
 
-import os
-
-key_data = os.getenv('gg')  # Set a default
-key_data = json.loads(key_data)
-
-
-# Now you can use key_data in your script
+# Load JSON data from file.json
+with open('file.json', 'r') as f:
+    key_data = json.load(f)
 
 # Initialize Google Drive client
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
-SERVICE_ACCOUNT_FILE = key_data
-credentials = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+SERVICE_ACCOUNT_FILE = key_data['service_account_file']
+credentials = service_account.Credentials.from_service_account_info(key_data, scopes=SCOPES)
 drive_service = build('drive', 'v3', credentials=credentials)
 
 # Google Drive upload function for JSON data
@@ -134,7 +129,7 @@ async def get_next_data():
                     print(f"Found {len(service_links)} service links for city: {city_link}")
 
                     # Limit to 4 concurrent tasks for service links
-                    for i in range(0, len(service_links), 11):
+                    for i in range(0, len(service_links), 10):
                         tasks = []
                         for service_link in service_links[i:i+10]:  # Open 10 links (tabs) at the same time
                             tasks.append(scrape_service_link(browser, service_link, state_link, city_link, all_data))
@@ -170,5 +165,5 @@ async def get_next_data():
         upload_data_to_drive_json(json_data, drive_folder_id, filename)
         print(f"Error encountered. Data uploaded to Google Drive. Total records: {len(all_data)}")
 
-# Run the async function in Jupyter Notebook
+# Run the async function
 asyncio.run(get_next_data())
