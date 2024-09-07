@@ -1,5 +1,4 @@
-
-name: Playwright Automation
+name: Playwright Automation 2
 
 on:
   schedule:
@@ -40,4 +39,4 @@ jobs:
       # Step 5: Run your Playwright script
       - name: Run Playwright script
         run: |
-          python pl2.py
+          python pl6.py
