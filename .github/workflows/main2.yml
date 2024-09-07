@@ -1,4 +1,4 @@
-name: Playwright Automationpl2
+name: Playwright Automation2
 
 # Schedule the action to run daily at midnight (adjust cron as needed)
 on:
