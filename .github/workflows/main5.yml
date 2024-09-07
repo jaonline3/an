@@ -39,4 +39,4 @@ jobs:
       # Step 5: Run your Playwright script
       - name: Run Playwright script
         run: |
-          python pl1.py
+          python pl5.py
