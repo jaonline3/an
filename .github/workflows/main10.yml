@@ -20,7 +20,8 @@ jobs:
       - name: Configure Tor for UK exit nodes
         run: |
           echo "ExitNodes {gb}" | sudo tee -a /etc/tor/torrc  # Restrict to UK exit nodes
-          echo "StrictNodes 1" | sudo tee -a /etc/tor/torrc   # Ensure it strictly uses UK nodes
+          echo "ExcludeExitNodes {us},{de},{fr}" | sudo tee -a /etc/tor/torrc  # Exclude non-UK nodes
+          echo "StrictNodes 1" | sudo tee -a /etc/tor/torrc  # Ensure it strictly uses UK nodes
 
       # Step 3: Start Tor Service
       - name: Start Tor Service
@@ -43,6 +44,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install playwright
           playwright install
+
       # Step 7: Run the Playwright script that uses Tor with UK exit nodes
       - name: Run Playwright script with UK Tor
         run: |
