@@ -42,7 +42,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install playwright
-
+          playwright install
       # Step 7: Run the Playwright script that uses Tor with UK exit nodes
       - name: Run Playwright script with UK Tor
         run: |
