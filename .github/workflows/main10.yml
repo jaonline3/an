@@ -15,18 +15,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Install ProtonVPN
+      # Step 1: Add ProtonVPN repository and install ProtonVPN CLI
       - name: Install ProtonVPN
         run: |
           sudo apt-get update
-          sudo apt-get install -y openvpn
-          wget https://protonvpn.com/download/protonvpn-cli.sh
-          chmod +x protonvpn-cli.sh
-          ./protonvpn-cli.sh --install
+          sudo apt-get install -y wget
+          wget -q -O - https://repo.protonvpn.com/debian/public_key.asc | sudo apt-key add -
+          echo 'deb https://repo.protonvpn.com/debian stable main' | sudo tee /etc/apt/sources.list.d/protonvpn.list
+          sudo apt-get update
+          sudo apt-get install -y protonvpn-cli-ng
 
-      # Step 2: Connect to UK VPN
+      # Step 2: Log in and connect to UK VPN (requires credentials)
       - name: Connect to UK VPN
         run: |
+          echo "${{ secrets.PROTONVPN_USERNAME }}" | sudo protonvpn-cli login
           sudo protonvpn-cli connect --cc UK
 
       # Step 3: Checkout the repository
