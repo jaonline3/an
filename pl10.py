@@ -8,12 +8,13 @@ async def main():
         browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
 
-        # Visit an IP-checking service
-        await page.goto('https://httpbin.org/ip')
+        for i in range(100):  # Loop to check IP 100 times
+            # Visit an IP-checking service
+            await page.goto('https://httpbin.org/ip')
 
-        # Extract the IP information from the page
-        content = await page.text_content('pre')
-        print("Detected IP from Playwright:", content)
+            # Extract the IP information from the page
+            content = await page.text_content('pre')
+            print(f"{i + 1}: Detected IP from Playwright: {content.strip()}")
 
         # Close the browser
         await browser.close()
