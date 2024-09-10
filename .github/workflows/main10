@@ -1,0 +1,57 @@
+name: Playwright Automation 10
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'  # Every day at midnight (UTC)
+  workflow_dispatch:   # Allows manual triggering
+    inputs:
+      example_input:
+        description: 'An example input'
+        required: false
+        default: 'default_value'
+
+jobs:
+  run-playwright:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Install ProtonVPN
+      - name: Install ProtonVPN
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openvpn
+          wget https://protonvpn.com/download/protonvpn-cli.sh
+          chmod +x protonvpn-cli.sh
+          ./protonvpn-cli.sh --install
+
+      # Step 2: Connect to UK VPN
+      - name: Connect to UK VPN
+        run: |
+          sudo protonvpn-cli connect --cc UK
+
+      # Step 3: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 4: Set up Python (version 3.9)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # Step 5: Install Python dependencies and Playwright
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas playwright nest_asyncio google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+          playwright install
+          playwright install-deps
+
+      # Step 6: Decode and save JSON file from base64
+      - name: Decode and save JSON file
+        run: echo "${{ secrets.gar }}" | base64 --decode > file.json
+
+      # Step 7: Run your Playwright script
+      - name: Run Playwright script
+        run: |
+          python pl10.py
