@@ -1,17 +1,12 @@
-name: Playwright Automation with Tor
+name: Playwright Automation with UK Tor
 
 on:
   schedule:
     - cron: '0 0 1 * *'  # Every day at midnight (UTC)
   workflow_dispatch:   # Allows manual triggering
-    inputs:
-      example_input:
-        description: 'An example input'
-        required: false
-        default: 'default_value'
 
 jobs:
-  run-playwright:
+  run-playwright-with-uk-tor:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,30 +16,34 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y tor
 
-      # Step 2: Start Tor service
+      # Step 2: Configure Tor for UK exit nodes
+      - name: Configure Tor for UK exit nodes
+        run: |
+          echo "ExitNodes {gb}" | sudo tee -a /etc/tor/torrc  # Restrict to UK exit nodes
+          echo "StrictNodes 1" | sudo tee -a /etc/tor/torrc   # Ensure it strictly uses UK nodes
+
+      # Step 3: Start Tor Service
       - name: Start Tor Service
         run: |
           sudo service tor start
 
-      # Step 3: Configure Playwright to use Tor SOCKS proxy
+      # Step 4: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python (version 3.9)
+      # Step 5: Set up Python (version 3.9 or as needed)
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
+      # Step 6: Install Python dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas playwright nest_asyncio google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
-          playwright install
-          playwright install-deps
+          pip install playwright
 
-      - name: Run Playwright script with Tor
+      # Step 7: Run the Playwright script that uses Tor with UK exit nodes
+      - name: Run Playwright script with UK Tor
         run: |
           python pl10.py
-
-      # Example of running a script that checks IP address via Playwright
-      # The `pl10.py` script should be configured to use Tor's SOCKS proxy
